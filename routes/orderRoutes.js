@@ -10,7 +10,7 @@ router.route('/')
 ;
 
 router.route('/:oid')
-    .get(OrderCtrl.getOrderById)
+    .get(protectRoutes, OrderCtrl.getOrderById)
 ;
 
 module.exports = router;
