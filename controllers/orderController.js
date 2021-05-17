@@ -2,15 +2,15 @@ const Order = require('../models/orderModel');
 const User = require('../models/userModel');
 
 module.exports = {
-	getAllOrders: async (req, res) => {
+	getAllOrders: async (req, res, next) => {
 		try {
 			const orders = await Order.find({});
 			res.status(200).json({ orders });
 		} catch (error) {
-			res.status(500).json({ error });
+			next(error);
 		}
 	},
-	newOrder: async (req, res) => {
+	newOrder: async (req, res, next) => {
 		try {
 			// products is an array of objects => { pid, qty }
 			const user = await User.findById(req.user.id).populate({
@@ -23,7 +23,7 @@ module.exports = {
 			);
 
 			const order = new Order({
-				products: user.cart,
+				products: user.cart.map(product => ({ name: product.name, description: product.description, price: product.price, id: product._id })),
 				customer: user._id,
 				paymentCash: payment,
 			});
@@ -32,16 +32,16 @@ module.exports = {
 
 			res.status(200).json({ order });
 		} catch (error) {
-			res.status(500).json({ error });
+			next(error);
 		}
 	},
-	getOrderById: async (req, res) => {
+	getOrderById: async (req, res, next) => {
 		try {
 			const id = req.params.oid;
 			const order = await Order.findById(id);
 			res.status(200).json({ order });
 		} catch (error) {
-			res.status(500).json({ error });
+			next(error);
 		}
 	},
 };

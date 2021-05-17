@@ -3,9 +3,11 @@ const mongoose = require('mongoose');
 const orderSchema = mongoose.Schema({
 	products: [
 		{
-			pid: {
-				type: mongoose.Schema.Types.ObjectId,
-				ref: 'Product',
+			product: {
+				name: String,
+				description: String,
+				price: Number,
+				id: mongoose.Schema.Types.ObjectId
 			},
 			qty: {
 				type: Number,
@@ -22,7 +24,7 @@ const orderSchema = mongoose.Schema({
 	},
 	orderStatus: {
 		type: String,
-		enum: ['Complete', 'Ongoing'],
+		enum: ['Complete', 'Ongoing', 'Cancelled', 'Refunded'],
 		default: 'Ongoing',
 	},
 });
