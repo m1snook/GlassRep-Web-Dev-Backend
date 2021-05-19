@@ -15,22 +15,6 @@ const sendDuplicateKeyError = (err, req) => {
 	return error;
 };
 
-// JWT Error
-const sendJwtError = (err) => {
-	let error = { ...err };
-	error.message = 'you are not logged in. please login to continue';
-	error.statusCode = 401;
-	return error;
-};
-
-// JWT expired error
-const sendTokenExpiredError = (err) => {
-	let error = { ...err };
-	error.message = 'your session has expired. please login to continue';
-	error.statusCode = 401;
-	return error;
-};
-
 // Handling Cast Errors
 const sendCastError = (err) => {
 	const message = `This data does not exist`;
@@ -58,8 +42,6 @@ const sendError = (err, req, res) => {
 module.exports = (err, req, res, next) => {
 	let error = { ...err };
 	if (err.code === 11000) error = sendDuplicateKeyError(err, req);
-	if (err.name === 'JsonWebTokenError') error = sendJwtError(err);
-	if (err.name === 'TokenExpiredError') error = sendTokenExpiredError(err);
 	if (err.name === 'CastError') error = sendCastError(err);
 	if (err.name === 'ValidationError') error = sendValidationError(err);
 
