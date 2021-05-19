@@ -13,7 +13,7 @@ module.exports = {
 	newOrder: async (req, res, next) => {
 		try {
 			// products is an array of objects => { pid, qty }
-			const user = await User.findById(req.user.id).populate({
+			const user = await User.findById(req.user._id).populate({
 				path: 'cart.pid',
 			});
 
@@ -23,7 +23,12 @@ module.exports = {
 			);
 
 			const order = new Order({
-				products: user.cart.map(product => ({ name: product.name, description: product.description, price: product.price, id: product._id })),
+				products: user.cart.map((product) => ({
+					name: product.name,
+					description: product.description,
+					price: product.price,
+					id: product._id,
+				})),
 				customer: user._id,
 				paymentCash: payment,
 			});

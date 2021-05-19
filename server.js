@@ -47,7 +47,7 @@ const DB_URI =
 		app.use(
 			cookieSession({
 				httpOnly: true,
-				keys: ['react-passport-auth'],
+				keys: ['glassRep-outh'],
 				sameSite: 'lax',
 				maxAge: 1000 * 60 * 60 * 24 * 3,
 			})

@@ -14,11 +14,11 @@ module.exports = {
 		try {
 			const { name, price, description } = req.body;
 
-			if(!name || !description) {
+			if (!name || !description) {
 				throw new AppError('Enter all the details', 400);
 			}
 
-			if(!price) {
+			if (!price) {
 				throw new AppError('Please enter the price', 400);
 			}
 
