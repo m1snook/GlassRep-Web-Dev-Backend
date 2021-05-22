@@ -4,13 +4,11 @@ const router = express.Router();
 const OrderCtrl = require('../controllers/orderController');
 
 // get all the current orders
-router.route('/')
-    .get(OrderCtrl.getAllOrders)
-    .post(protectRoutes, restrictTo('customer'), OrderCtrl.newOrder)
-;
+router
+	.route('/')
+	.get(OrderCtrl.getAllOrders)
+	.post(protectRoutes, OrderCtrl.newOrder);
 
-router.route('/:oid')
-    .get(protectRoutes, OrderCtrl.getOrderById)
-;
+router.route('/:oid').get(protectRoutes, OrderCtrl.getOrderById);
 
 module.exports = router;

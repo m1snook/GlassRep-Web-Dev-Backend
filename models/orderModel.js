@@ -7,7 +7,7 @@ const orderSchema = mongoose.Schema({
 				name: String,
 				description: String,
 				price: Number,
-				id: mongoose.Schema.Types.ObjectId
+				id: mongoose.Schema.Types.ObjectId,
 			},
 			qty: {
 				type: Number,
@@ -15,11 +15,10 @@ const orderSchema = mongoose.Schema({
 			},
 		},
 	],
-	customer: {
-		type: mongoose.Schema.Types.ObjectId,
-		ref: 'User',
+	customerId: {
+		type: String,
 	},
-	paymentCash: {
+	price: {
 		type: Number,
 	},
 	orderStatus: {
