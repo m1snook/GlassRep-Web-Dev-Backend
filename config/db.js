@@ -3,11 +3,18 @@ dotenv.config({ path: `${__dirname}/../.env` });
 
 const mongoose = require('mongoose');
 
-const DB_URI =
+// production database URI
+const DB_URI_PROD =
 	`mongodb+srv://<DB_USER>:<DB_PASSWORD>@cluster0.wo5lz.mongodb.net/<DB_NAME>?retryWrites=true&w=majority`
 		.replace('<DB_USER>', process.env.DB_USER)
 		.replace('<DB_PASSWORD>', process.env.DB_PASSWORD)
 		.replace('<DB_NAME>', process.env.DB_NAME);
+
+// development database URI
+const DB_URI_DEV = `mongodb://localhost:27017/<DB_NAME>`.replace('<DB_NAME>', process.env.DB_NAME);
+
+// Select current DB URI
+const DB_URI =  process.env.NODE_ENV === 'production' ? DB_URI_PROD : DB_URI_DEV;
 
 exports.initDb = async () => {
 	await mongoose.connect(DB_URI, {
