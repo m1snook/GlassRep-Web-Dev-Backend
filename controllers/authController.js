@@ -37,7 +37,7 @@ exports.protectRoutes = async (req, res, next) => {
 		next(err);
 	}
 };
-
+// is admin 
 // restrict routes based on role
 exports.restrictTo = (role) => {
 	return (req, res, next) => {
