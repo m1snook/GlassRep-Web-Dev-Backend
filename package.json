@@ -17,6 +17,8 @@
     "firebase-admin": "^9.8.0",
     "mongoose": "^5.12.9",
     "morgan": "^1.10.0",
+    "swagger-jsdoc": "^6.1.0",
+    "swagger-ui-express": "^4.3.0",
     "validator": "^13.6.0"
   },
   "devDependencies": {
