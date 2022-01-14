@@ -11,7 +11,7 @@ const DB_URI_PROD =
 		.replace('<DB_NAME>', process.env.DB_NAME);
 
 // development database URI
-const DB_URI_DEV = ``
+const DB_URI_DEV = process.env.DEV_DB_URI;
 
 // Select current DB URI
 const DB_URI =  process.env.NODE_ENV === 'production' ? DB_URI_PROD : DB_URI_DEV;
